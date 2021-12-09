@@ -30,6 +30,6 @@ public class RpcClientConfig {
     private int connectCount = 1;
 
     private List<Peer> servers = Arrays.asList(
-            new Peer("127.0.0.1", 3000)
+            new Peer("192.168.201.73", 3000)
     );
 }

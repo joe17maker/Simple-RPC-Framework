@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @描述
  * @创建人 Xiong Nie
@@ -6,9 +8,11 @@
  */
 public class Client {
     public static void main(String[] args) {
-        RpcClient client=new RpcClient();
-        CalculateService calculateService=client.getProxy(CalculateService.class);
-        System.out.println(calculateService.add(2,2));
-        System.out.println(calculateService.def(10,3));
+        NettyClient nettyClient=new NettyClient("127.0.0.1",3000);
+        CalculateService calculateService=nettyClient.getProxy(CalculateService.class);
+        Random random=new Random();
+        for(int i=0;i<10;i++){
+            System.out.println(calculateService.def(random.nextInt(10),random.nextInt(10)));
+        }
     }
 }
