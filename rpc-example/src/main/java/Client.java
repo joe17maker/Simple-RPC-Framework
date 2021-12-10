@@ -9,10 +9,12 @@ import java.util.Random;
 public class Client {
     public static void main(String[] args) {
         NettyClient nettyClient=new NettyClient("127.0.0.1",3000);
-        CalculateService calculateService=nettyClient.getProxy(CalculateService.class);
+        CalculateService calculateService=new RpcClientProxy(nettyClient).getProxy(CalculateService.class);
         Random random=new Random();
         for(int i=0;i<10;i++){
-            System.out.println(calculateService.def(random.nextInt(10),random.nextInt(10)));
+            int res=calculateService.def(random.nextInt(10),random.nextInt(10));
+            System.out.println(res);
+
         }
     }
 }

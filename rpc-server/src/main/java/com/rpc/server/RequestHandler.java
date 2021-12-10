@@ -25,7 +25,7 @@ public class RequestHandler {
             log.info("server invoke method [{}] success",method);
         } catch (NoSuchMethodException e) {
             log.error("server invoke method fail");
-            return RpcResponse.fail(ResponseCode.METHOD_NOT_FOUND);
+            return RpcResponse.fail(ResponseCode.METHOD_NOT_FOUND,rpcRequest.getRequestId());
         }
         return result;
     }

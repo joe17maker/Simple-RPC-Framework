@@ -43,6 +43,5 @@ public class CommonDecoder extends ReplayingDecoder {
         Serializer serializer = new KryoSerializer();
         Object obj = serializer.deserialize(bytes, clazz);
         out.add(obj);
-        log.info("decode complete");
     }
 }

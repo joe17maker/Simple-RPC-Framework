@@ -31,14 +31,15 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
     protected void channelRead0(ChannelHandlerContext ctx, RpcRequest request) throws Exception {
         log.info("server recive request:{}",request);
         Object result= requestHandler.handle(request);
-        RpcResponse rpcResponse=RpcResponse.success(result);
-        ChannelFuture future=ctx.writeAndFlush(rpcResponse);
+        RpcResponse rpcResponse=RpcResponse.success(result,request.getRequestId());
+        log.info("server send response {}",rpcResponse);
+        ctx.writeAndFlush(rpcResponse);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.error("exception occurs when handling");
-        cause.getStackTrace();
+        log.error("exception occurs when handling{}",cause);
+        cause.printStackTrace();
         ctx.close();
     }
 

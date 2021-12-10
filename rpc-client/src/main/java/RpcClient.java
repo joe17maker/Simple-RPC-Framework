@@ -5,6 +5,8 @@ import com.rpc.codec.Encoder;
 import com.rpc.common.utils.ReflectionUtils;
 
 import java.lang.reflect.Proxy;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @描述
@@ -13,5 +15,5 @@ import java.lang.reflect.Proxy;
  * @修改人和其它信息
  */
 public interface RpcClient {
-    RpcResponse sendRequest(RpcRequest rpcRequest);
+    CompletableFuture<RpcResponse> sendRequest(RpcRequest rpcRequest) throws ExecutionException, InterruptedException;
 }
